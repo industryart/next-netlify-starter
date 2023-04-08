@@ -16,10 +16,6 @@
       "./path/to/rss-feeds.toml"
     ]
 
-  [plugins.inputs]
-    # Where should data files reside
-    dataDir = "site/_data"
-
 [[redirects]]
   from = "/rss-feeds.json"
   to = "/feeds.json"
