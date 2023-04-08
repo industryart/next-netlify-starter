@@ -4,6 +4,8 @@
 
 [[plugins]]
   package = "netlify-plugin-cypress"
+
+[[plugins]]
   package = "netlify-plugin-fetch-feeds"
 
   [plugins.inputs]
