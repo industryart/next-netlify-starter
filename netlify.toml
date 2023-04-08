@@ -13,7 +13,7 @@
     dataDir = "site/_data"
     # URLs of RSS feeds to fetch
     feeds = [
-      "rss-feeds.toml"
+      "https://jade-tartufo-c04725.netlify.app/rss-feeds.toml"
     ]
 
 [[redirects]]

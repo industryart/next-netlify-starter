@@ -1,5 +1,14 @@
-[feeds]
-feed1 = "https://www.rebelnews.com/news.rss""
-feed2 = "https://www.rebelnews.com/news.rss"
-feed3 = "https://thepostmillennial.com/index.rss"
+[feeds.feed1]
+url = "https://www.rebelnews.com/news.rss"
+
+[feeds.feed2]
+url = "https://www.rebelnews.com/news.rss"
+
+[feeds.feed3]
+url = "https://thepostmillennial.com/index.rss"
+
 # Add more feeds here
+
+limit = 10
+sortBy = "pubDate"
+sortOrder = "desc"
