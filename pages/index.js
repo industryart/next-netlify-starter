@@ -1,29 +1,23 @@
-import { fetchFeeds } from 'fetch-feeds';
+import Head from 'next/head'
 
-export async function getStaticProps() {
-  const feeds = await fetchFeeds('../netlify.toml');
-
-  return {
-    props: {
-      feeds,
-    },
-  };
-}
-
-function HomePage({ feeds }) {
+export default function Home() {
   return (
     <div>
+      <Head>
+        <title>My RSS Feeds</title>
+      </Head>
       <h1>My RSS Feeds</h1>
-      <ul>
-        {feeds.map((feed) => (
-          <li key={feed.id}>
-            <a href={feed.link}>{feed.title}</a>
-            <p>{feed.description}</p>
-          </li>
-        ))}
-      </ul>
+      <ul id="feed-list"></ul>
+      <script
+        src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+      <script
+        src="/fetch-rss.js"
+        type="module"></script>
+      <script
+        src="/render-feeds.js"
+        type="module"></script>
     </div>
-  );
+  )
 }
-
-export default HomePage;

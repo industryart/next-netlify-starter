@@ -1,0 +1,5 @@
+[feeds]
+feed1 = "https://www.rebelnews.com/news.rss""
+feed2 = "https://www.thegatewaypundit.com/feed/"
+feed3 = "https://thepostmillennial.com/index.rss"
+# Add more feeds here
