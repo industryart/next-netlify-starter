@@ -1,71 +1,29 @@
-import Head from 'next/head'
-import Header from '@components/Header'
-import Footer from '@components/Footer'
+import { fetchFeeds } from 'fetch-feeds';
 
-//rss feed variables
-const fs      = require('fs');
-const fetch   = require('node-fetch');
-const parser  = require('xml2json');
-const chalk   = require('chalk');
+export async function getStaticProps() {
+  const feeds = await fetchFeeds('../netlify.toml');
 
-module.exports = {
-
-  async onPreBuild({ inputs, utils }) {
-
-    // Gather the data from all the specified feeds
-    for (const feed of inputs.feeds) {
-
-      // Where fetched data should reside in the buid
-      let dataFilePath = `${inputs.dataDir}/${feed.name}.json`;
-
-      // reinstate from cache if it is present
-      if ( await utils.cache.has(dataFilePath) ) {
-        await utils.cache.restore(dataFilePath);
-        console.log('Restored from cache:', chalk.green(feed.url));
-      }
-      // Or if it's not cached, let's fetch it and cache it.
-      else {
-        var data = await fetch(feed.url)
-          .then(async function(res) {
-
-            // Stash all data as JSON.
-            let contentType = res.headers.get('content-type').toLowerCase();
-            if(contentType == 'application/json') {
-              return res.json();
-            } else {
-              let text = await res.text();
-              let json = parser.toJson(text);
-              return JSON.parse(json);
-            }
-          });
-
-        // put the fetched data in the daa file, and then cahce it.
-        // await saveFeed(JSON.stringify(data), dataFilePath);
-        await fs.writeFileSync(dataFilePath, JSON.stringify(data));
-        await utils.cache.save(dataFilePath, { ttl: feed.ttl });
-        console.log('Fetched and cached: ', chalk.yellow(feed.url), chalk.gray(`(TTL:${feed.ttl} seconds)`));
-
-      }
-    }
-  }
+  return {
+    props: {
+      feeds,
+    },
+  };
 }
 
-export default function Home() {
+function HomePage({ feeds }) {
   return (
-    <div className="container">
-      <Head>
-        <title>Next.js Starter!</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main>
-        <Header title="Welcome to my app!" />
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
-      </main>
-
-      <Footer />
+    <div>
+      <h1>My RSS Feeds</h1>
+      <ul>
+        {feeds.map((feed) => (
+          <li key={feed.id}>
+            <a href={feed.link}>{feed.title}</a>
+            <p>{feed.description}</p>
+          </li>
+        ))}
+      </ul>
     </div>
-  )
+  );
 }
+
+export default HomePage;
