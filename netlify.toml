@@ -13,7 +13,7 @@
     dataDir = "site/_data"
     # URLs of RSS feeds to fetch
     feeds = [
-      "./path/to/rss-feeds.toml"
+      "rss-feeds.toml"
     ]
 
 [[redirects]]
