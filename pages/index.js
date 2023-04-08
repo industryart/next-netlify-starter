@@ -13,10 +13,10 @@ export default function Home() {
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
       <script
-        src="/fetch-rss.js"
+        src="../pages/fetch-rss.js"
         type="module"></script>
       <script
-        src="/render-feeds.js"
+        src="../render-feeds.js"
         type="module"></script>
     </div>
   )
